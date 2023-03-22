@@ -70,7 +70,7 @@ watch(
     <div class="flex flex-col h-full" :style="mobileSafeArea">
       <main class="flex flex-col flex-1 min-h-0">
         <div class="p-4">
-          <NButton dashed block @click="handleAdd">
+          <NButton dashed type="info" round block @click="handleAdd">
             New chat
           </NButton>
         </div>
@@ -78,7 +78,7 @@ watch(
           <List />
         </div>
         <div class="p-4">
-          <NButton block @click="show = true">
+          <NButton  ghost type="info" block @click="show = true">
             Prompt Store
           </NButton>
         </div>

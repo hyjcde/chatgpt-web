@@ -59,7 +59,6 @@ function handleSubmit() {
 
 async function onConversation() {
   let message = prompt.value
-
   if (loading.value)
     return
 
@@ -107,7 +106,7 @@ async function onConversation() {
   try {
     let lastText = ''
     const fetchChatAPIOnce = async () => {
-      await fetchChatAPIProcess<Chat.ConversationResponse>({
+			await fetchChatAPIProcess<Chat.ConversationResponse>({
         prompt: message,
         options,
         signal: controller.signal,
@@ -121,7 +120,7 @@ async function onConversation() {
             chunk = responseText.substring(lastIndex)
           try {
             const data = JSON.parse(chunk)
-            updateChat(
+							updateChat(
               +uuid,
               dataSources.value.length - 1,
               {
@@ -135,7 +134,7 @@ async function onConversation() {
               },
             )
 
-            if (openLongReply && data.detail.choices[0].finish_reason === 'length') {
+						if (openLongReply && data.detail.choices[0].finish_reason === 'length') {
               options.parentMessageId = data.id
               lastText = data.text
               message = ''
@@ -145,13 +144,12 @@ async function onConversation() {
             scrollToBottom()
           }
           catch (error) {
-          //
           }
         },
       })
     }
-
     await fetchChatAPIOnce()
+
   }
   catch (error: any) {
     const errorMessage = error?.message ?? t('common.wrong')
@@ -476,13 +474,13 @@ onUnmounted(() => {
       >
         <div
           id="image-wrapper"
-          class="w-full max-w-screen-xl m-auto dark:bg-[#101014]"
+          class="w-full max-w-screen-xl m-auto dark:bg-[#101013]"
           :class="[isMobile ? 'p-2' : 'p-4']"
         >
           <template v-if="!dataSources.length">
             <div class="flex items-center justify-center mt-4 text-center text-neutral-300">
               <SvgIcon icon="ri:bubble-chart-fill" class="mr-2 text-3xl" />
-              <span>Aha~</span>
+								<span>Welcome to JackChat</span>
             </div>
           </template>
           <template v-else>
